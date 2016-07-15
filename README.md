@@ -4,6 +4,6 @@ Implementing Realm.io basic operations in Android with ListView
 
 See full tutorial here: http://tosinonikute.com/using-realm-in-android-part-1/
 
-![alt tag](http://www.tosinonikute.com/wp-content/themes/author/images/screenshot1.png)
+<a href="#"><img src="http://www.tosinonikute.com/wp-content/themes/author/images/screenshot1.png" align="left" width="200" ></a>
 
-![alt tag](http://www.tosinonikute.com/wp-content/themes/author/images/screenshot2.png)
+<a href="#"><img src="http://www.tosinonikute.com/wp-content/themes/author/images/screenshot2.png" align="left" width="200" ></a>
