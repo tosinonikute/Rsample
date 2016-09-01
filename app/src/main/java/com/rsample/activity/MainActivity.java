@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.rsample.EmailValidator;
 import com.rsample.R;
 import com.rsample.model.PhoneBook;
 
@@ -25,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     Button saveContact, viewAllContact;
     //initialize realm
     Realm realm;
+
+    // The validator for the email input field.
+    private EmailValidator mEmailValidator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
         saveContact = (Button) findViewById(R.id.savecontact);
         viewAllContact = (Button) findViewById(R.id.viewallcontact);
 
+        // Setup field validators.
+        mEmailValidator = new EmailValidator();
+        email.addTextChangedListener(mEmailValidator);
+
 
         saveContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,11 +55,17 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("hello+++");
 
                 if(name.getText().toString().equals("")){
+                    name.setError("Empty first name field");
                     Snackbar.make(view, "Please enter your name", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 } else if(lastName.getText().toString().equals("")){
+                    lastName.setError("Empty last name field");
                     Snackbar.make(view, "Please enter your last name", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 } else if(email.getText().toString().equals("")){
-                    Snackbar.make(view, "Please enter your city", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    email.setError("Empty email field");
+                    Snackbar.make(view, "Please enter your email", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                } else if (!mEmailValidator.isValid()) {
+                    email.setError("Invalid email");
+                    Snackbar.make(view, "Please enter a valid email", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 } else if(phoneNumber.getText().toString().equals("")){
                     Snackbar.make(view, "Please enter your phone number", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 } else {
