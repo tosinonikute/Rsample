@@ -21,3 +21,13 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    junitVersion = "4.12"
+    buildToolsVersion = "24.0.0"
+    realmVersion = "0.87.3"
+    supportLibVersion = "24.2.0"
+    runnerVersion = "0.5"
+    rulesVersion = "0.5"
+    espressoVersion = "2.2.2"
+}
