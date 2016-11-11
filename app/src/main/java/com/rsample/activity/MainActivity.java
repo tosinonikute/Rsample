@@ -73,16 +73,18 @@ public class MainActivity extends AppCompatActivity {
                     // Get a Realm instance for this thread
                     realm = Realm.getInstance(getApplicationContext());
 
-                    //Writing to Realm with Transaction blocks
-                    realm.beginTransaction();
 
-                    PhoneBook phoneBook = realm.createObject(PhoneBook.class);
-
-                    // increment index
-                    long nextID = (long) (realm.where(PhoneBook.class).max("id"));
-                    long primaryKeyValue = nextID + 1;
 
                     try {
+                        //Writing to Realm with Transaction blocks
+                        realm.beginTransaction();
+
+                        PhoneBook phoneBook = realm.createObject(PhoneBook.class);
+
+                        // increment index
+                        long nextID = (long) (realm.where(PhoneBook.class).max("id"));
+                        long primaryKeyValue = nextID + 1;
+
                         phoneBook.setId(primaryKeyValue);
                         phoneBook.setName(name.getText().toString());
                         phoneBook.setLastName(lastName.getText().toString());
@@ -100,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("Realm Error", "error" + e.getLocalizedMessage());
                         realm.cancelTransaction();
                     }
+
+                    //Close the realm instance for this thread
+                    realm.close();
 
                     //Notify user that contact has been saved using Green background
                     Snackbar snack = Snackbar.make(view, "New contact information saved", Snackbar.LENGTH_LONG).setAction("Action", null);

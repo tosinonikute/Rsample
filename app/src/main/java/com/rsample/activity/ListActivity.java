@@ -2,6 +2,7 @@ package com.rsample.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -23,6 +24,7 @@ public class ListActivity extends AppCompatActivity {
     // Declare Variables
     ListView list;
     ListViewAdapter listviewadapter;
+    RealmResults<PhoneBook> results;
 
 
     @Override
@@ -37,8 +39,14 @@ public class ListActivity extends AppCompatActivity {
         //Writing to Realm with Transaction blocks
         realm.beginTransaction();
 
-        RealmResults<PhoneBook> results =
-                realm.where(PhoneBook.class).findAll();
+        try {
+            results = realm.where(PhoneBook.class).findAll();
+        } catch (Exception e) {
+            Log.e("Realm Error", "error" + e.getLocalizedMessage());
+            realm.cancelTransaction();
+        }
+        realm.commitTransaction();
+        realm.close();
 
         // Locate the ListView in listview_main.xml
         list = (ListView) findViewById(R.id.listview);
