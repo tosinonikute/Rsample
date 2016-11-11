@@ -46,7 +46,7 @@ public class ListActivity extends AppCompatActivity {
             realm.cancelTransaction();
         }
         realm.commitTransaction();
-        realm.close();
+
 
         // Locate the ListView in listview_main.xml
         list = (ListView) findViewById(R.id.listview);
@@ -115,10 +115,6 @@ public class ListActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
-
-
 
 
 
